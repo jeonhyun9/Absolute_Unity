@@ -1,4 +1,4 @@
-﻿using System;
+﻿//using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -94,6 +94,10 @@ public class MoveAgent : MonoBehaviour
             //배열의 첫 번째 항목 삭제
             //부모 컴포넌트 까지 배열에 담기 때문.
             wayPoints.RemoveAt(0);
+
+            //첫 번째로 이동할 위치를 불규칙하게 추출
+            //Count = 길이
+            nextIdx = Random.Range(0, wayPoints.Count);
         }
 
         MoveWayPoint();
@@ -158,10 +162,12 @@ public class MoveAgent : MonoBehaviour
         {
             //다음 목적지의 배열 첨자를 계산
             //나머지 연산의 응용이다. 배열을 처음부터 끝까지 순회하는 로직에 사용!
-            nextIdx = ++nextIdx % wayPoints.Count;
+            //nextIdx = ++nextIdx % wayPoints.Count;
             //0 % 10 = 0
             //1 % 10 = 1
             //2 % 10 = 2 ...
+
+            nextIdx = Random.Range(0, wayPoints.Count);
 
             //다음 목적지로 이동 명령을 수행
             MoveWayPoint();

@@ -50,6 +50,9 @@ public class EnemyAI : MonoBehaviour
     private readonly int hashSpeed = Animator.StringToHash("Speed");
     private readonly int hashDie = Animator.StringToHash("Die");
     private readonly int hashDieIdx = Animator.StringToHash("DieIdx");
+    private readonly int hashOffset = Animator.StringToHash("Offset");
+    private readonly int hashWalkSpeed = Animator.StringToHash("WalkSpeed");
+    private readonly int hashPlayerDie = Animator.StringToHash("PlayerDie");
 
     //다음과도 같이 가능하지만 , 문자열로 호출할 때 마다 내부의 해시 테이블을 검색하기 때문에 속도가 느리다.
     //private readonly int hashMove = Animator.StringToHash("IsMove");
@@ -75,6 +78,11 @@ public class EnemyAI : MonoBehaviour
 
         //코루틴의 지연시간 생성
         ws = new WaitForSeconds(0.3f);
+
+        //Cycle Offset 값을 불규칙하게 변경
+        animator.SetFloat(hashOffset, Random.Range(0.0f, 1.0f));
+        //Speed 값을 불규칙하게 변경
+        animator.SetFloat(hashWalkSpeed, Random.Range(1.0f, 1.2f));
     }
 
     private void OnEnable() //스크립트가  활성화 되어있을 때 실행.
@@ -83,6 +91,15 @@ public class EnemyAI : MonoBehaviour
         StartCoroutine(CheckState());
         //Action 코루틴 함수 실행
         StartCoroutine(Action());
+
+        //델리게이트
+        Damage.OnPlayerDie += this.OnPlayerDie;
+    }
+
+    private void OnDisable()
+    {
+        //델리게이트
+        Damage.OnPlayerDie -= this.OnPlayerDie;
     }
 
     IEnumerator CheckState()
@@ -169,4 +186,13 @@ public class EnemyAI : MonoBehaviour
         animator.SetFloat(hashSpeed, moveAgent.speed);
     }
 
+    public void OnPlayerDie()
+    {
+        moveAgent.Stop();
+        enemyFire.isFire = false;
+        //모드 코루틴 함수를 종료시킴
+        StopAllCoroutines();
+
+        animator.SetTrigger(hashPlayerDie);
+    }
 }
