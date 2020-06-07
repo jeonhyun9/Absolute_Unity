@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [System.Serializable]
 public class PlayerAnim
@@ -32,6 +33,15 @@ public class PlayerCtrl : MonoBehaviour
     [HideInInspector]
     public Animation anim;
 
+    private void OnEnable()
+    {
+        GameManager.OnItemChange += UpdateSetUp;
+    }
+
+    private void UpdateSetUp()
+    {
+        moveSpeed = GameManager.instance.gameData.speed;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +53,9 @@ public class PlayerCtrl : MonoBehaviour
         //Animation 컴포넌트의 애니메이션 클립을 지정하고 실행
         anim.clip = playerAnim.idle;
         anim.Play();
+
+        //불러온 데이터 값을 moveSpeed에 적용
+        moveSpeed = GameManager.instance.gameData.speed;
     }
 
     // Update is called once per frame

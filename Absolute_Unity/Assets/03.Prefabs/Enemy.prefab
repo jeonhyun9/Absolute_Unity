@@ -49,7 +49,8 @@ GameObject:
   - component: {fileID: 4441797213339666933}
   - component: {fileID: 4441797213339666939}
   - component: {fileID: 4441797213339666942}
-  m_Layer: 0
+  - component: {fileID: -1593964063386753195}
+  m_Layer: 14
   m_Name: Enemy
   m_TagString: ENEMY
   m_Icon: {fileID: 0}
@@ -312,6 +313,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a8ccd5f6b053b46aae7429453b3eb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpBarPrefab: {fileID: 1828825844725592235, guid: 42bbfe3bb318d424583f9d82866126d8,
+    type: 3}
+  hpBarOffset: {x: 0, y: 2.2, z: 0}
+--- !u!114 &-1593964063386753195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4441797214432770209}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14ebd7041fd466c448e1161579a2ae34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewRange: 15
+  viewAngle: 120
 --- !u!1 &4441797214432770247
 GameObject:
   m_ObjectHideFlags: 0
