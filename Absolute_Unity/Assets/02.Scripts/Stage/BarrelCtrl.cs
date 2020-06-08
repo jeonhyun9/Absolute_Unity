@@ -37,7 +37,7 @@ public class BarrelCtrl : MonoBehaviour
     void Start()
     {
         //Rigidbody 컴포넌트를 추출해 저장
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
 
         //MeshFilter 컴포넌트를 저장할 변수
         meshFilter = GetComponent<MeshFilter>();
@@ -49,10 +49,20 @@ public class BarrelCtrl : MonoBehaviour
         _audio = GetComponent<AudioSource>();
 
         //Shake 스크립트를 추출
-        shake = GameObject.Find("CameraRig").GetComponent<Shake>();
+        //shake = GameObject.Find("CameraRig").GetComponent<Shake>();
+        StartCoroutine(GetShake());
 
         //난수를 발생시켜 불규칙적인 텍스쳐를 적용
         _renderer.material.mainTexture = textures[UnityEngine.Random.Range(0, textures.Length)];
+    }
+
+    IEnumerator GetShake()
+    {
+        while (!UnityEngine.SceneManagement.SceneManager.GetSceneByName("PLAY").isLoaded)
+        {
+            yield return null;
+        }
+        shake = GameObject.Find("CameraRig").GetComponent<Shake>();
     }
 
     //충돌이 발생했을 때 한 번 호출되는 콜백 함수

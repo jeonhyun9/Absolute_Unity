@@ -12,18 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeac33988eea28f42aacb2bafdd0e334, type: 3}
   m_Name: GameDataSO
   m_EditorClassIdentifier: 
-  killCount: 1
-  hp: 130
+  killCount: 0
+  hp: 120
   damage: 25
-  speed: 6.6
-  equipItem:
-  - itemType: 1
-    itemCalc: 1
-    name: Speed Up
-    desc: Increase Speed 10%
-    value: 0.1
-  - itemType: 0
-    itemCalc: 0
-    name: Hp Up
-    desc: Increase + 10 Hp
-    value: 10
+  speed: 6
+  equipItem: []
